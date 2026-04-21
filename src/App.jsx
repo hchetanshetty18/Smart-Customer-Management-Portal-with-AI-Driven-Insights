@@ -1,41 +1,26 @@
-import { motion, useScroll, useSpring } from 'framer-motion'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import ScopeRequirements from './components/ScopeRequirements'
-import Deliverables from './components/Deliverables'
-import DashboardPreview from './components/DashboardPreview'
-import Footer from './components/Footer'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Dashboard from './pages/Dashboard';
+import Customers from './pages/Customers';
+import CustomerDetails from './pages/CustomerDetails';
+import AskAI from './pages/AskAI';
+import Insights from './pages/Insights';
 
 function App() {
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  })
-
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Scroll progress bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[3px] z-[100] origin-left"
-        style={{
-          scaleX,
-          background: 'linear-gradient(90deg, #6366f1, #22d3ee)',
-        }}
-      />
-
-
-      <Navbar />
-      <main>
-        <Hero />
-        <ScopeRequirements />
-        <DashboardPreview />
-        <Deliverables />
-      </main>
-      <Footer />
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="customers" element={<Customers />} />
+          <Route path="customers/:id" element={<CustomerDetails />} />
+          <Route path="insights" element={<Insights />} />
+          <Route path="ask-ai" element={<AskAI />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
