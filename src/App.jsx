@@ -6,6 +6,8 @@ import Customers from './pages/Customers';
 import CustomerDetails from './pages/CustomerDetails';
 import AskAI from './pages/AskAI';
 import Insights from './pages/Insights';
+import Tickets from './pages/Tickets';
+import Devices from './pages/Devices';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="customers" element={<Customers />} />
           <Route path="customers/:id" element={<CustomerDetails />} />
+          <Route path="tickets" element={<Tickets />} />
+          <Route path="devices" element={<Devices />} />
           <Route path="insights" element={<Insights />} />
           <Route path="ask-ai" element={<AskAI />} />
         </Route>

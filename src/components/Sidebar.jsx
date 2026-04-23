@@ -1,10 +1,12 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, LineChart, Sparkles, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, LineChart, Sparkles, LogOut, Ticket, Cpu } from 'lucide-react';
 
 export default function Sidebar() {
   const links = [
     { name: 'Dashboard', path: '/', icon: LayoutDashboard },
     { name: 'Customers', path: '/customers', icon: Users },
+    { name: 'Tickets', path: '/tickets', icon: Ticket },
+    { name: 'Devices', path: '/devices', icon: Cpu },
     { name: 'Insights', path: '/insights', icon: LineChart },
     { name: 'Ask AI', path: '/ask-ai', icon: Sparkles },
   ];

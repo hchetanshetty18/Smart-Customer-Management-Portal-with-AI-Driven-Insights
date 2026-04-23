@@ -5,13 +5,110 @@
 }
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
   body {
-    @apply bg-[#F9FAFB] text-slate-900 font-sans antialiased;
+    font-family: var(--font-sans);
+    background-color: #F9FAFB;
+    color: #0f172a;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-/* Ensure minimal scrollbars to match SaaS vibe */
+/* ── Layout ── */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app-sidebar {
+  width: 220px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  z-index: 40;
+}
+
+.app-main {
+  flex: 1;
+  margin-left: 220px;
+  padding: 24px;
+  min-width: 0;          /* prevent flex overflow */
+}
+
+/* ── Card ── */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+  overflow: hidden;
+}
+
+.card-body {
+  padding: 16px 20px;
+}
+
+/* ── Spacing helpers ── */
+.section-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Dashboard grids ── */
+.grid-kpi {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.grid-charts {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+/* ── Chart container ── */
+.chart-container {
+  width: 100%;
+  min-width: 0;  /* critical for ResponsiveContainer inside flex/grid */
+}
+
+/* ── Typography ── */
+.page-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.body-text {
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -26,12 +123,53 @@
   background: #94a3b8;
 }
 
-/* Custom Utilities */
+/* ── Premium Utilities ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+
+/* ── Utilities ── */
 .fade-in {
-  animation: fadeIn 0.3s ease-in-out forwards;
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .app-main {
+    margin-left: 0;
+  }
+  .app-sidebar {
+    display: none;
+  }
+  .grid-kpi {
+    grid-template-columns: 1fr;
+  }
+  .grid-charts {
+    grid-template-columns: 1fr;
+  }
 }
